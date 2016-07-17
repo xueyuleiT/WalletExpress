@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RadioGroup
+        android:id="@+id/id_radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <RadioButton
+            android:id="@+id/id_tab1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:text="微信"
+            android:textColor="@drawable/selector_tab_text_color" />
+
+        <RadioButton
+            android:id="@+id/id_tab2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:button="@null"
+            android:gravity="center"
+            android:text="通信录"
+            android:textColor="@drawable/selector_tab_text_color" />
+
+        <RadioButton
+            android:id="@+id/id_tab3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:button="@null"
+            android:gravity="center"
+            android:text="朋友"
+            android:textColor="@drawable/selector_tab_text_color" />
+    </RadioGroup>
+
+    <ImageView
+        android:id="@+id/id_tab_line"
+        android:layout_width="100dp"
+        android:layout_height="5dp"
+        android:background="@android:color/holo_blue_dark" />
+
+</LinearLayout>

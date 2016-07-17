@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:background="@mipmap/register_bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <include layout="@layout/toolbar" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@mipmap/register_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <ImageView
         android:layout_width="match_parent"
@@ -15,7 +21,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.1">
+        android:layout_weight="1.2">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -157,5 +163,115 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"/>
         </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="@dimen/public_space_value_10"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+            <LinearLayout
+                android:layout_width="@dimen/public_space_value_0"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_weight="3">
+
+
+                <ImageButton
+                    android:layout_marginLeft="@dimen/public_space_value_10"
+
+                    android:layout_width="@dimen/public_space_value_20"
+                    android:layout_height="@dimen/public_space_value_20"
+                    android:background="@mipmap/agree_n"/>
+                <TextView
+                    android:textSize="@dimen/public_textsize_value_14"
+                    android:layout_marginLeft="@dimen/public_space_value_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="阅读并同意《简借注册协议》"
+                    android:textColor="@android:color/white"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/public_space_value_10"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+            <LinearLayout
+                android:layout_width="@dimen/public_space_value_0"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_weight="3">
+
+
+                <ImageButton
+                    android:layout_width="@dimen/public_space_value_20"
+                    android:layout_height="@dimen/public_space_value_20"
+                    android:src="@mipmap/advantage"/>
+                <TextView
+                    android:textSize="@dimen/public_textsize_value_14"
+                    android:layout_marginLeft="@dimen/public_space_value_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="平台优势"
+                    android:textColor="@android:color/white"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="@dimen/public_space_value_10"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+            <LinearLayout
+                android:layout_width="@dimen/public_space_value_0"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_weight="3">
+
+
+                <ImageButton
+                    android:layout_width="@dimen/public_space_value_20"
+                    android:layout_height="@dimen/public_space_value_20"
+                    android:src="@mipmap/advantage"/>
+                <TextView
+                    android:textSize="@dimen/public_textsize_value_14"
+                    android:layout_marginLeft="@dimen/public_space_value_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="平台优势"
+                    android:textColor="@android:color/white"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
     </LinearLayout>
+    </LinearLayout>
+
+
 </LinearLayout>
+    </LinearLayout>
