@@ -15,6 +15,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="561cac81e0f55a8ed9005" />
     </application>
 
 </manifest>

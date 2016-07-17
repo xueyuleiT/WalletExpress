@@ -1,9 +1,7 @@
 package com.express.wallet.walletexpress;
 
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -15,8 +13,8 @@ import android.widget.TextView;
 import com.express.wallet.walletexpress.fragments.OneFragment;
 import com.express.wallet.walletexpress.fragments.ThreeFragment;
 import com.express.wallet.walletexpress.fragments.TwoFragment;
-
-import java.util.ArrayList;
+import com.express.wallet.walletexpress.utils.CommonUtil;
+import com.umeng.analytics.MobclickAgent;
 
 public class MainActivity extends UmengActivity {
     private FragmentManager fragmentManager;
@@ -29,7 +27,7 @@ public class MainActivity extends UmengActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        MobclickAgent.setDebugMode(BuildConfig.DEBUG);
         initView();
     }
 
@@ -78,8 +76,29 @@ public class MainActivity extends UmengActivity {
                         break;
 
                 }
-
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        doubleClickExitApp();
+    }
+
+    private void doubleClickExitApp() {
+        if (CommonUtil.downTime == 0) {
+            CommonUtil.downTime = System.currentTimeMillis();
+            showToast(getResources().getString(R.string.double_click_exit_app));
+            return;
+        }
+        long lastDownTime = System.currentTimeMillis();
+        if ((lastDownTime - CommonUtil.downTime) > 1000) {
+            CommonUtil.downTime = lastDownTime;
+            showToast(getResources().getString(R.string.double_click_exit_app));
+        } else {
+            MobclickAgent.onKillProcess(this);
+            System.exit(0);
+            finish();
+        }
     }
 }
