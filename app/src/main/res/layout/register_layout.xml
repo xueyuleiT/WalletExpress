@@ -26,7 +26,8 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp"
+            android:layout_weight="1">
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -40,14 +41,15 @@
                 android:background="@drawable/edt_bg"
                 android:orientation="horizontal"
                 android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_weight="3">
+                android:layout_height="match_parent"
+                android:layout_weight="4">
                 <ImageView
                     android:src="@mipmap/phone"
                     android:layout_width="22dp"
                     android:layout_height="22dp" />
                 <com.express.wallet.walletexpress.view.ExtendClearEditText
                     android:hint="请输入您的手机号"
+                    android:textColor="@color/T4"
                     android:textSize="@dimen/public_textsize_value_14"
                     android:layout_marginLeft="@dimen/public_space_value_5"
                     android:background="@null"
@@ -65,35 +67,44 @@
             android:layout_marginTop="@dimen/public_space_value_10"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp"
+            android:layout_weight="1">
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_weight="1"/>
             <LinearLayout
-                android:paddingLeft="@dimen/public_space_value_5"
-                android:paddingRight="@dimen/public_space_value_5"
-                android:paddingTop="@dimen/public_space_value_5"
-                android:paddingBottom="@dimen/public_space_value_5"
                 android:gravity="center_vertical"
                 android:background="@drawable/edt_bg"
                 android:orientation="horizontal"
                 android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_weight="3">
+                android:layout_height="match_parent"
+                android:layout_weight="4">
                 <ImageView
-                    android:layout_marginLeft="@dimen/public_space_value_5"
+
+                    android:layout_marginLeft="@dimen/public_space_value_10"
                     android:src="@mipmap/pwd"
-                    android:layout_width="15dp"
+                    android:layout_width="14dp"
                     android:layout_height="22dp" />
                 <com.express.wallet.walletexpress.view.ExtendClearEditText
-                    android:hint="请输入您的验证码"
+                    android:hint="请输入验证码"
+                    android:textColor="@color/T4"
                     android:textSize="@dimen/public_textsize_value_14"
                     android:layout_marginLeft="@dimen/public_space_value_5"
                     android:background="@null"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"/>
+                <TextView
+                    android:paddingLeft="@dimen/public_space_value_5"
+                    android:paddingRight="@dimen/public_space_value_5"
+                    android:gravity="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/public_textsize_value_12"
+                    android:text="获取验证码"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/msgcode_bg"/>
             </LinearLayout>
             <View
                 android:layout_width="0dp"
@@ -105,7 +116,8 @@
             android:layout_marginTop="@dimen/public_space_value_10"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp"
+            android:layout_weight="1">
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -119,15 +131,16 @@
                 android:background="@drawable/edt_bg"
                 android:orientation="horizontal"
                 android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_weight="3">
+                android:layout_height="match_parent"
+                android:layout_weight="4">
                 <ImageView
-                    android:layout_marginLeft="@dimen/public_space_value_5"
+                    android:layout_marginLeft="@dimen/public_space_value_4"
                     android:src="@mipmap/recommond"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp" />
+                    android:layout_width="17dp"
+                    android:layout_height="17dp" />
                 <com.express.wallet.walletexpress.view.ExtendClearEditText
                     android:hint="请输入您的邀请码(选填)"
+                    android:textColor="@color/T4"
                     android:textSize="@dimen/public_textsize_value_14"
                     android:layout_marginLeft="@dimen/public_space_value_5"
                     android:background="@null"
@@ -145,7 +158,8 @@
             android:layout_marginTop="@dimen/public_space_value_10"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp"
+            android:layout_weight="1">
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -156,8 +170,8 @@
                 android:text="注册"
                 android:background="@drawable/btn_next_r5"
                 android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_weight="3"/>
+                android:layout_height="match_parent"
+                android:layout_weight="4"/>
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -173,18 +187,15 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"/>
             <LinearLayout
-                android:layout_width="@dimen/public_space_value_0"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_weight="3">
+                android:gravity="center">
 
-
-                <ImageButton
-                    android:layout_marginLeft="@dimen/public_space_value_10"
-
+                <CheckBox
+                    android:button="@null"
                     android:layout_width="@dimen/public_space_value_20"
                     android:layout_height="@dimen/public_space_value_20"
-                    android:background="@mipmap/agree_n"/>
+                    android:background="@drawable/agreement_bg"/>
                 <TextView
                     android:textSize="@dimen/public_textsize_value_14"
                     android:layout_marginLeft="@dimen/public_space_value_5"
@@ -214,7 +225,7 @@
                 android:layout_width="@dimen/public_space_value_0"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:layout_weight="3">
+                android:layout_weight="4">
 
 
                 <ImageButton
@@ -239,7 +250,9 @@
             android:layout_marginTop="@dimen/public_space_value_10"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            android:layout_weight="1.8">
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -248,20 +261,37 @@
                 android:layout_width="@dimen/public_space_value_0"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:layout_weight="3">
+                android:layout_weight="4">
 
 
-                <ImageButton
-                    android:layout_width="@dimen/public_space_value_20"
-                    android:layout_height="@dimen/public_space_value_20"
-                    android:src="@mipmap/advantage"/>
-                <TextView
-                    android:textSize="@dimen/public_textsize_value_14"
-                    android:layout_marginLeft="@dimen/public_space_value_5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="平台优势"
-                    android:textColor="@android:color/white"/>
+                <ImageView
+                    android:background="@mipmap/bottom_1"
+                    android:layout_width="@dimen/public_space_value_45"
+                    android:layout_height="@dimen/public_space_value_45" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+                <ImageView
+                    android:background="@mipmap/bottom_2"
+                    android:layout_width="@dimen/public_space_value_45"
+                    android:layout_height="@dimen/public_space_value_45" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+                <ImageView
+                    android:background="@mipmap/bottom_3"
+                    android:layout_width="@dimen/public_space_value_45"
+                    android:layout_height="@dimen/public_space_value_45" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+                <ImageView
+                    android:background="@mipmap/bottom_4"
+                    android:layout_width="@dimen/public_space_value_45"
+                    android:layout_height="@dimen/public_space_value_45" />
             </LinearLayout>
 
             <View
@@ -274,4 +304,3 @@
 
 
 </LinearLayout>
-    </LinearLayout>

@@ -3,6 +3,8 @@
 
     <solid android:color="@color/BT2" />
 
-    <corners android:radius="@dimen/public_space_value_5" />
+    <corners
+        android:topRightRadius="@dimen/public_space_value_5"
+        android:bottomRightRadius="@dimen/public_space_value_5" />
 
 </shape>

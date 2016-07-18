@@ -11,7 +11,7 @@ import com.express.wallet.walletexpress.R;
 /**
  * Created by cashbus on 6/22/16.
  */
-public class OneFragment extends BasicFragment{
+public class HomeFragment extends BasicFragment{
 
     View rootView;
     @Override
@@ -22,7 +22,7 @@ public class OneFragment extends BasicFragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_one,null);
+        rootView = inflater.inflate(R.layout.home,null);
         return rootView;
     }
 

@@ -10,7 +10,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.express.wallet.walletexpress.fragments.OneFragment;
+import com.express.wallet.walletexpress.fragments.FourFragment;
+import com.express.wallet.walletexpress.fragments.HomeFragment;
 import com.express.wallet.walletexpress.fragments.ThreeFragment;
 import com.express.wallet.walletexpress.fragments.TwoFragment;
 import com.express.wallet.walletexpress.utils.CommonUtil;
@@ -39,6 +40,8 @@ public class MainActivity extends UmengActivity {
         tvTitle = (TextView) findViewById(R.id.title);
         rightImg = (ImageView) findViewById(R.id.rightImg);
 
+        rightImg.setVisibility(View.VISIBLE);
+        rightImg.setImageResource(R.mipmap.more);
 
         fragmentManager = getSupportFragmentManager();
         radioGroup = (RadioGroup)findViewById(R.id.radioGroup);
@@ -48,8 +51,8 @@ public class MainActivity extends UmengActivity {
 
 
         tvTitle.setText("简贷");
-        OneFragment oneFragment = new OneFragment();
-        transaction.replace(R.id.contentView, oneFragment);
+        HomeFragment homeFragment = new HomeFragment();
+        transaction.replace(R.id.contentView, homeFragment);
         transaction.commit();
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -58,8 +61,8 @@ public class MainActivity extends UmengActivity {
                 switch (checkedId) {
                     case R.id.imgOne:
                         transaction = fragmentManager.beginTransaction();
-                        OneFragment oneFragment = new OneFragment();
-                        transaction.replace(R.id.contentView, oneFragment);
+                        HomeFragment homeFragment = new HomeFragment();
+                        transaction.replace(R.id.contentView, homeFragment);
                         transaction.commit();
                         break;
                     case R.id.imgTwo:
@@ -68,12 +71,20 @@ public class MainActivity extends UmengActivity {
                         transaction.replace(R.id.contentView, twoFragment);
                         transaction.commit();
                         break;
+
                     case R.id.imgThree:
                         transaction = fragmentManager.beginTransaction();
                         ThreeFragment threeFragment = new ThreeFragment();
                         transaction.replace(R.id.contentView, threeFragment);
                         transaction.commit();
                         break;
+                    case R.id.imgFour:
+                        transaction = fragmentManager.beginTransaction();
+                        FourFragment fourFragment = new FourFragment();
+                        transaction.replace(R.id.contentView, fourFragment);
+                        transaction.commit();
+                        break;
+
 
                 }
             }
