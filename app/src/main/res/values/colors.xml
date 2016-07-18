@@ -25,4 +25,6 @@
     <color name="T5">#333333</color>
 
     <color name="BT2">#CCCCCC</color>
+
+    <color name="progressbar_color">#5e5e5e</color>
 </resources>

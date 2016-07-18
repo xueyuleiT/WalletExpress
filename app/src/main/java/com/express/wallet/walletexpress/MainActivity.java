@@ -78,12 +78,6 @@ public class MainActivity extends UmengActivity {
                         transaction.replace(R.id.contentView, threeFragment);
                         transaction.commit();
                         break;
-                    case R.id.imgFour:
-                        transaction = fragmentManager.beginTransaction();
-                        FourFragment fourFragment = new FourFragment();
-                        transaction.replace(R.id.contentView, fourFragment);
-                        transaction.commit();
-                        break;
 
 
                 }

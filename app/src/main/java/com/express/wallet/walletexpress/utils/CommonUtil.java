@@ -1,7 +1,12 @@
 package com.express.wallet.walletexpress.utils;
 
+import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 
 import java.io.IOException;
 
@@ -20,6 +25,14 @@ public class CommonUtil {
 
     public static final String DOMAIN = "http:// jj.zljianjie.com/public/api_zsjr";
 
+    public static final String GUIDE_URL = "http://jj.zljianjie.com/public/api_zsjr/guide.html?v5=1";
+
+    public static final String TAB_2_PAGE = "http:// jj.zljianjie.com/public/api_zsjr";
+
+    public static final String REQUEST_PARAM_USER_AGENT = "com.express.wallet.walletexpress.v1.0.0";
+    public static final String WEBVIEW_PARAM_USER_AGENT = "com.express.wallet.walletexpress.v1.0.0.micromessenger";
+    public static final String WEIXINJSBRIDGE= "WeixinJSBridge";
+    public static final String WEBACTIVITY_LINK = "web_activity_link";
     public static final String HTTPREQUEST_COOKIE = "Cookie";
     public static String JSESSIONID = "";
     public static String SERVERID = "";
@@ -84,5 +97,38 @@ public class CommonUtil {
 
         return task;
     }
+    public static void setWebViewSettings(final WebView webView) {
 
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setUserAgentString(CommonUtil.WEBVIEW_PARAM_USER_AGENT);
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
+            webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        } else {
+            webView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        }
+        webView.getSettings().setLightTouchEnabled(true);
+        webView.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
+        webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+
+        webView.setFocusable(true);
+        webView.setClickable(true);
+        webView.setHapticFeedbackEnabled(true);
+        webView.setFocusableInTouchMode(true);
+        webView.getSettings().setUseWideViewPort(true);
+        webView.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                    case MotionEvent.ACTION_UP:
+                        if (!webView.hasFocus()) {
+                            v.requestFocusFromTouch();
+                        }
+                        break;
+                }
+                return false;
+            }
+        });
+    }
 }

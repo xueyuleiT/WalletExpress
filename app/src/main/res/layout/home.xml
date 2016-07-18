@@ -148,7 +148,7 @@
             android:layout_height="0dp"
             android:layout_weight="1.2">
 
-        <com.express.wallet.walletexpress.view.ExtendClearEditText
+        <EditText
             android:hint="请输入您的借款金额"
             android:gravity="center"
             android:background="@drawable/edt_bg_r5"
