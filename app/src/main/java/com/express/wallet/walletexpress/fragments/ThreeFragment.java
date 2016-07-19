@@ -84,7 +84,7 @@ public class ThreeFragment extends BasicFragment{
                 progressBar.setProgress(newProgress);
             }
         });
-        webView.loadUrl(CommonUtil.REWARD_URL);
+        webView.loadUrl("http://jj.zljianjie.com/public/api_zsjr/user_center.html?v5=1");
     }
 
 

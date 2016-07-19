@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.CookieManager;
@@ -35,13 +36,14 @@ public class WebViewActivity extends UmengActivity implements MessageCallBackEve
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mTitle = (TextView) findViewById(R.id.title);
+        mTitle = (TextView) findViewById(R.id.titleLeft);
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         String url = getIntent().getStringExtra(CommonUtil.WEBACTIVITY_LINK);
 
+        mTitle.setText(getIntent().getStringExtra(CommonUtil.WEBACTIVITY_TITLE));
         webView = (WebView) findViewById(R.id.webView);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
@@ -126,5 +128,23 @@ public class WebViewActivity extends UmengActivity implements MessageCallBackEve
                 return false;
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(webView.canGoBack()){
+            webView.goBack();
+        }else
+            super.onBackPressed();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

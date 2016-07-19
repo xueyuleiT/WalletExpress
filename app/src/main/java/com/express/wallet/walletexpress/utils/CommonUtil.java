@@ -9,6 +9,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -27,20 +29,21 @@ public class CommonUtil {
 
     public static final String GUIDE_URL = "http://jj.zljianjie.com/public/api_zsjr/guide.html?v5=1";
     public static final String REWARD_URL = "http://jj.zljianjie.com/public/api_zsjr/news?id=5&v5=1";
-
+    public static final String REGISTER_AGREEMENT_URL = "http://jj.zljianjie.com/public/api_zsjr/pact.html?v5=1";
     public static final String TAB_2_PAGE = "http:// jj.zljianjie.com/public/api_zsjr";
 
     public static final String REQUEST_PARAM_USER_AGENT = "com.express.wallet.walletexpress.v1.0.0";
     public static final String WEBVIEW_PARAM_USER_AGENT = "com.express.wallet.walletexpress.v1.0.0.micromessenger";
     public static final String WEIXINJSBRIDGE= "WeixinJSBridge";
     public static final String WEBACTIVITY_LINK = "web_activity_link";
+    public static final String WEBACTIVITY_TITLE = "web_activity_title";
     public static final String HTTPREQUEST_COOKIE = "Cookie";
     public static String JSESSIONID = "";
     public static String SERVERID = "";
     public static long downTime = 0;
 
     public static int screem_width,screem_height;
-
+    public static String PHONE_PATTERN ="^[1][3,4,7,5,8][0-9]{9}$";
     public static OkhttpTask getTask(final String apiUrl) {
 
 
@@ -131,5 +134,17 @@ public class CommonUtil {
                 return false;
             }
         });
+    }
+
+    /**
+     * 校验电话号码
+     *
+     * @param phone
+     * @return
+     */
+    public static boolean isPhoneValid(String phone) {
+        Pattern pattern = Pattern.compile(PHONE_PATTERN);
+        Matcher matcher = pattern.matcher(phone);
+        return matcher.matches();
     }
 }

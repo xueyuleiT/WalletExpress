@@ -49,6 +49,8 @@
                     android:layout_height="22dp" />
                 <com.express.wallet.walletexpress.view.ExtendClearEditText
                     android:hint="请输入您的手机号"
+                    android:inputType="phone"
+                    android:digits="0123456789"
                     android:textColor="@color/T4"
                     android:textSize="@dimen/public_textsize_value_14"
                     android:layout_marginLeft="@dimen/public_space_value_5"
@@ -92,6 +94,8 @@
                     android:textSize="@dimen/public_textsize_value_14"
                     android:layout_marginLeft="@dimen/public_space_value_5"
                     android:background="@null"
+                    android:inputType="number"
+                    android:digits="0123456789"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"/>
@@ -140,6 +144,8 @@
                     android:layout_height="17dp" />
                 <com.express.wallet.walletexpress.view.ExtendClearEditText
                     android:hint="请输入您的邀请码(选填)"
+                    android:inputType="number"
+                    android:digits="0123456789"
                     android:textColor="@color/T4"
                     android:textSize="@dimen/public_textsize_value_14"
                     android:layout_marginLeft="@dimen/public_space_value_5"
@@ -202,7 +208,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="阅读并同意《简借注册协议》"
-                    android:textColor="@android:color/white"/>
+                    android:textColor="@android:color/white"
+                    android:id="@+id/agreement" />
             </LinearLayout>
 
             <View

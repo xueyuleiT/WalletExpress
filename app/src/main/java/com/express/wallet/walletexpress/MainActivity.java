@@ -52,7 +52,7 @@ public class MainActivity extends UmengActivity implements BackHandledInterface{
         transaction = fragmentManager.beginTransaction();
 
 
-        tvTitle.setText("简贷");
+        tvTitle.setText("首页");
         HomeFragment homeFragment = new HomeFragment();
         transaction.replace(R.id.contentView, homeFragment);
         transaction.commit();
@@ -62,12 +62,14 @@ public class MainActivity extends UmengActivity implements BackHandledInterface{
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.imgOne:
+                        tvTitle.setText("首页");
                         transaction = fragmentManager.beginTransaction();
                         HomeFragment homeFragment = new HomeFragment();
                         transaction.replace(R.id.contentView, homeFragment);
                         transaction.commit();
                         break;
                     case R.id.imgTwo:
+                        tvTitle.setText("攻略");
                         transaction = fragmentManager.beginTransaction();
                         TwoFragment twoFragment = new TwoFragment();
                         transaction.replace(R.id.contentView, twoFragment);
@@ -75,6 +77,7 @@ public class MainActivity extends UmengActivity implements BackHandledInterface{
                         break;
 
                     case R.id.imgThree:
+                        tvTitle.setText("奖励");
                         transaction = fragmentManager.beginTransaction();
                         ThreeFragment threeFragment = new ThreeFragment();
                         transaction.replace(R.id.contentView, threeFragment);

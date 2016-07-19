@@ -25,6 +25,12 @@
 
         </activity>
 
+        <activity android:name=".WebViewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="561cac81e0f55a8ed9005" />
