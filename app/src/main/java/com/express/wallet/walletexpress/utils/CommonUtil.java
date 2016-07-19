@@ -26,6 +26,7 @@ public class CommonUtil {
     public static final String DOMAIN = "http:// jj.zljianjie.com/public/api_zsjr";
 
     public static final String GUIDE_URL = "http://jj.zljianjie.com/public/api_zsjr/guide.html?v5=1";
+    public static final String REWARD_URL = "http://jj.zljianjie.com/public/api_zsjr/news?id=5&v5=1";
 
     public static final String TAB_2_PAGE = "http:// jj.zljianjie.com/public/api_zsjr";
 

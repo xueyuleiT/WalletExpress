@@ -12,12 +12,14 @@ import android.widget.TextView;
 
 import com.express.wallet.walletexpress.fragments.FourFragment;
 import com.express.wallet.walletexpress.fragments.HomeFragment;
+import com.express.wallet.walletexpress.fragments.PlaceholderFragment;
 import com.express.wallet.walletexpress.fragments.ThreeFragment;
 import com.express.wallet.walletexpress.fragments.TwoFragment;
+import com.express.wallet.walletexpress.listener.BackHandledInterface;
 import com.express.wallet.walletexpress.utils.CommonUtil;
 import com.umeng.analytics.MobclickAgent;
 
-public class MainActivity extends UmengActivity {
+public class MainActivity extends UmengActivity implements BackHandledInterface{
     private FragmentManager fragmentManager;
     private FragmentTransaction transaction;
     private RadioGroup radioGroup;
@@ -87,23 +89,34 @@ public class MainActivity extends UmengActivity {
 
     @Override
     public void onBackPressed() {
-        doubleClickExitApp();
+        if (mPlaceholderFragment == null|| !mPlaceholderFragment.onBackPressed()) {
+            //处理
+            doubleClickExitApp();
+        }
     }
 
     private void doubleClickExitApp() {
-        if (CommonUtil.downTime == 0) {
-            CommonUtil.downTime = System.currentTimeMillis();
-            showToast(getResources().getString(R.string.double_click_exit_app));
-            return;
-        }
-        long lastDownTime = System.currentTimeMillis();
-        if ((lastDownTime - CommonUtil.downTime) > 1000) {
-            CommonUtil.downTime = lastDownTime;
-            showToast(getResources().getString(R.string.double_click_exit_app));
-        } else {
-            MobclickAgent.onKillProcess(this);
-            System.exit(0);
-            finish();
-        }
+            if (CommonUtil.downTime == 0) {
+                CommonUtil.downTime = System.currentTimeMillis();
+                showToast(getResources().getString(R.string.double_click_exit_app));
+                return;
+            }
+            long lastDownTime = System.currentTimeMillis();
+            if ((lastDownTime - CommonUtil.downTime) > 1000) {
+                CommonUtil.downTime = lastDownTime;
+                showToast(getResources().getString(R.string.double_click_exit_app));
+            } else {
+                MobclickAgent.onKillProcess(this);
+                System.exit(0);
+                finish();
+            }
+
+    }
+
+
+    PlaceholderFragment mPlaceholderFragment;
+    @Override
+    public void setSelectedFragment(PlaceholderFragment selectedFragment) {
+        this.mPlaceholderFragment = selectedFragment;
     }
 }

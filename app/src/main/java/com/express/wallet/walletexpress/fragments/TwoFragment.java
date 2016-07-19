@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 
 import com.express.wallet.walletexpress.BuildConfig;
 import com.express.wallet.walletexpress.R;
+import com.express.wallet.walletexpress.listener.BackHandledInterface;
 import com.express.wallet.walletexpress.listener.CustomChromeClient;
 import com.express.wallet.walletexpress.utils.CommonUtil;
 import com.express.wallet.walletexpress.utils.HostJsScope;
@@ -23,7 +24,7 @@ import com.express.wallet.walletexpress.utils.HostJsScope;
 /**
  * Created by cashbus on 6/22/16.
  */
-public class TwoFragment extends BasicFragment{
+public class TwoFragment extends PlaceholderFragment {
     private WebView webView;
     private ProgressBar progressBar;
     View rootView;
@@ -57,6 +58,7 @@ public class TwoFragment extends BasicFragment{
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                loadHistoryUrls.add(url);
                 return false;
             }
 
@@ -85,6 +87,29 @@ public class TwoFragment extends BasicFragment{
             }
         });
         webView.loadUrl(CommonUtil.GUIDE_URL);
+        loadHistoryUrls.add(CommonUtil.GUIDE_URL);
     }
+
+    @Override
+    public boolean onBackPressed() {
+        Log.d("","webView.canGoBack() =====>"+webView.canGoBack());
+        if (webView.canGoBack()){
+
+            //过滤是否为重定向后的链接
+            if(loadHistoryUrls.size()>0&&loadHistoryUrls.get(loadHistoryUrls.size()-1).contains("index.html"))
+                //移除加载栈中的最后两个链接
+                loadHistoryUrls.remove(loadHistoryUrls.get(loadHistoryUrls.size() - 1));
+                loadHistoryUrls.remove(loadHistoryUrls.get(loadHistoryUrls.size()-1));
+
+                //加载重定向之前的页
+                webView.loadUrl(loadHistoryUrls.get(loadHistoryUrls.size()-1));
+
+//            webView.goBack();
+            return true;
+        }else {
+            return false;
+        }
+    }
+
 
 }
