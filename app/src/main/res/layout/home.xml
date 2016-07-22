@@ -161,6 +161,7 @@
             android:layout_height="0dp"
             android:layout_weight="1">
         <Button
+            android:id="@+id/loan"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="@dimen/public_space_value_40"
             android:layout_marginRight="@dimen/public_space_value_40"

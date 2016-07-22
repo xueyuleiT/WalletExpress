@@ -15,4 +15,9 @@
         <!--<item name="android:windowIsTranslucent">true</item>-->
         <item name="android:progressDrawable">@drawable/progressbar_bg</item>
     </style>
+    <style name="AppTheme.WindowFullScreen" parent="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
 </resources>

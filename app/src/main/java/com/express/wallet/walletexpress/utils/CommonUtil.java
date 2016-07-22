@@ -1,5 +1,6 @@
 package com.express.wallet.walletexpress.utils;
 
+import android.content.Context;
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
@@ -24,9 +25,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by zenghui on 7/2/16.
  */
 public class CommonUtil {
+    //引导页是否展示过
+    public static final  String SPASH_SHOW = "SPASH_SHOW";
+    public static final  String TOKEN = "token";
+    public static final String DOMAIN = "http://jj.zljianjie.com";
+    public static final int SITE_ID = 122811;
 
-    public static final String DOMAIN = "http:// jj.zljianjie.com/public/api_zsjr";
-
+    public static final  String URL_TOKEN = "YitniN ";
+    public static final String KEY = "jj.zljianjie.com";
     public static final String GUIDE_URL = "http://jj.zljianjie.com/public/api_zsjr/guide.html?v5=1";
     public static final String REWARD_URL = "http://jj.zljianjie.com/public/api_zsjr/news?id=5&v5=1";
     public static final String REGISTER_AGREEMENT_URL = "http://jj.zljianjie.com/public/api_zsjr/pact.html?v5=1";
@@ -41,6 +47,7 @@ public class CommonUtil {
     public static String JSESSIONID = "";
     public static String SERVERID = "";
     public static long downTime = 0;
+
 
     public static int screem_width,screem_height;
     public static String PHONE_PATTERN ="^[1][3,4,7,5,8][0-9]{9}$";
@@ -143,8 +150,23 @@ public class CommonUtil {
      * @return
      */
     public static boolean isPhoneValid(String phone) {
+
+        if (TextUtils.isEmpty(phone)){
+            return false;
+        }
+
         Pattern pattern = Pattern.compile(PHONE_PATTERN);
         Matcher matcher = pattern.matcher(phone);
         return matcher.matches();
+    }
+    public static void setCookies(retrofit2.Response response, Context context){
+        for (String string:response.raw().headers().values("Set-Cookie")){
+            Log.d("","headers ===>"+string);
+            if (string.contains("JSESSIONID") && !JSESSIONID.equals(string)){
+                JSESSIONID = string.split(";")[0];
+            }else if (string.contains("SERVERID") && !SERVERID.equals(string)){
+                SERVERID = string.split(";")[0];
+            }
+        }
     }
 }
