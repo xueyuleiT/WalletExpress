@@ -5,7 +5,6 @@
     android:orientation="vertical">
 
         <ImageView
-            android:visibility="gone"
             android:id="@+id/welcomeImg"
             android:scaleType="fitXY"
             android:layout_width="match_parent"
@@ -13,6 +12,11 @@
             android:src="@mipmap/convenient"/>
 
         <com.express.wallet.walletexpress.view.EarthView
+            android:visibility="gone"
+            android:layout_marginLeft="@dimen/public_space_value_10"
+            android:layout_marginTop="@dimen/public_space_value_10"
+            android:layout_marginRight="@dimen/public_space_value_10"
+            android:layout_marginBottom="@dimen/public_space_value_10"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 </LinearLayout>

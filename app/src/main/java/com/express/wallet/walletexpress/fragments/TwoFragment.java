@@ -96,11 +96,21 @@ public class TwoFragment extends PlaceholderFragment {
         if (webView.canGoBack()){
 
             //过滤是否为重定向后的链接
-            if(loadHistoryUrls.size()>0&&loadHistoryUrls.get(loadHistoryUrls.size()-1).contains("index.html"))
+            if(loadHistoryUrls.size()>0&&loadHistoryUrls.get(loadHistoryUrls.size()-1).contains("index.html")) {
+                if (loadHistoryUrls.size() == 0){
+                    return false;
+                }
                 //移除加载栈中的最后两个链接
                 loadHistoryUrls.remove(loadHistoryUrls.get(loadHistoryUrls.size() - 1));
+            }
+                if (loadHistoryUrls.size() == 0){
+                    return false;
+                }
                 loadHistoryUrls.remove(loadHistoryUrls.get(loadHistoryUrls.size()-1));
 
+                if (loadHistoryUrls.size() == 0){
+                    return false;
+                }
                 //加载重定向之前的页
                 webView.loadUrl(loadHistoryUrls.get(loadHistoryUrls.size()-1));
 
