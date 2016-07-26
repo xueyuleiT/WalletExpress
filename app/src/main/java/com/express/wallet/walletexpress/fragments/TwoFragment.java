@@ -97,9 +97,6 @@ public class TwoFragment extends PlaceholderFragment {
 
             //过滤是否为重定向后的链接
             if(loadHistoryUrls.size()>0&&loadHistoryUrls.get(loadHistoryUrls.size()-1).contains("index.html")) {
-                if (loadHistoryUrls.size() == 0){
-                    return false;
-                }
                 //移除加载栈中的最后两个链接
                 loadHistoryUrls.remove(loadHistoryUrls.get(loadHistoryUrls.size() - 1));
             }
