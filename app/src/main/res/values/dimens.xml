@@ -1,4 +1,5 @@
 <resources>
+    <dimen name="public_space_value_1px">1px</dimen>
     <!-- 公用的间距，以距离值标记 -->
     <dimen name="public_space_value_0">0dp</dimen>
     <dimen name="public_space_value_0.1">0.1dp</dimen>

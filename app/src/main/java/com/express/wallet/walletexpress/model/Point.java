@@ -7,7 +7,15 @@ public class Point {
 
     private int x, y, r,oX,oY;
     private int angle,speed;
-    private boolean p1 = false,p2= false,p3= false,isBoard = false;
+    private boolean p1 = false,p2= false,p3= false,isBoard = false,draw = false;
+
+    public boolean isDraw() {
+        return draw;
+    }
+
+    public void setDraw(boolean draw) {
+        this.draw = draw;
+    }
 
     public int getoX() {
         return oX;
