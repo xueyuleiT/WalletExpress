@@ -2,12 +2,17 @@ package com.express.wallet.walletexpress.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
+import android.graphics.RadialGradient;
+import android.graphics.Shader;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 
 
 import com.express.wallet.walletexpress.R;
@@ -25,10 +30,17 @@ import java.util.TimerTask;
 public class EarthView extends View{
 
     List<Point> points = new ArrayList<>();
+    int rotate = 0;
     Timer timer = new Timer();
     Paint paint = new Paint();
+    Paint mPaint = new Paint();
+    Paint bgPaint = new Paint();
     Paint linePaint = new Paint();
+    boolean isDraw = false;
     void mRun(){
+        if (isDraw){
+            return;
+        }
         int size = points.size()-1;
         for (int i = 0; i < size;i++){
             Point point = points.get(i);
@@ -52,66 +64,66 @@ public class EarthView extends View{
 
     public EarthView(Context context) {
         super(context);
-        TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                mRun();
-            }
-        };
-        timer.schedule(timerTask,10,200);
-        paint.setStyle(Paint.Style.FILL);
-        paint.setAntiAlias(true);
-        paint.setColor(getResources().getColor(R.color.colorPrimary));
-        linePaint.setStrokeWidth(cr/2);
-        linePaint.setAntiAlias(true);
-        linePaint.setColor(getResources().getColor(R.color.colorAccent));
+        init();
     }
 
     public EarthView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                mRun();
-            }
-        };
-        timer.schedule(timerTask,10,200);
-        paint.setStyle(Paint.Style.FILL);
-        paint.setAntiAlias(true);
-        paint.setColor(getResources().getColor(R.color.colorPrimary));
-        linePaint.setStrokeWidth(cr/2);
-        linePaint.setAntiAlias(true);
-        linePaint.setColor(getResources().getColor(R.color.colorAccent));
+        init();
     }
 
     public EarthView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init();
+    }
+
+    void init(){
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
                 mRun();
             }
         };
-        timer.schedule(timerTask,10,200);
+        timer.schedule(timerTask,10,50);
         paint.setStyle(Paint.Style.FILL);
         paint.setAntiAlias(true);
-        paint.setColor(getResources().getColor(R.color.colorPrimary));
-        linePaint.setStrokeWidth(cr/2);
+        paint.setColor(Color.BLUE);
+        linePaint.setStrokeWidth(1);
         linePaint.setAntiAlias(true);
-        linePaint.setColor(getResources().getColor(R.color.colorAccent));
+        linePaint.setColor(Color.argb(220,251,202,14));
+
+        mPaint.setAntiAlias(true);
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeWidth(cr/2);
+        mPaint.setColor(Color.BLUE);
+
+        bgPaint.setAntiAlias(true);
+        bgPaint.setStyle(Paint.Style.FILL);
+        bgPaint.setColor(Color.BLACK);
+        bgPaint.setAlpha(200);
     }
 
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            rotate+=2;
+            if (rotate >= 360){
+                rotate = rotate%360;
+            }
+            isDraw = true;
             postInvalidate();
         }
     };
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
+//        canvas.drawCircle(w/2,w/2,r,bgPaint);
+        RadialGradient lg = new RadialGradient(w/2,w/2,w/2,Color.argb(100,0,0,0),Color.argb(200,0,0,0), Shader.TileMode.MIRROR);
+        Paint lgPaint = new Paint();
+        lgPaint.setShader(lg);
+        canvas.drawCircle(w/2,w/2,r,lgPaint);
+        canvas.rotate(rotate,w/2,w/2);
         int size = points.size()-1;
         for (int i = 0; i < size;i++){
             Point mPoint = points.get(i);
@@ -124,14 +136,11 @@ public class EarthView extends View{
             if (mPoint.getPoint3() != null) {
                 canvas.drawLine(mPoint.getX(), mPoint.getY(), mPoint.getPoint3().getX(), mPoint.getPoint3().getY(), linePaint);
             }
-            canvas.drawCircle(mPoint.getX(),mPoint.getY(),cr,paint);
+            if (!mPoint.isBoard())
+                canvas.drawCircle(mPoint.getX(),mPoint.getY(),cr,paint);
         }
-//        Paint mPaint = new Paint();
-//        mPaint.setAntiAlias(true);
-//        mPaint.setStyle(Paint.Style.STROKE);
-//        mPaint.setStrokeWidth(cr/2);
-//        mPaint.setColor(getResources().getColor(R.color.colorPrimary));
-//        canvas.drawCircle(r,r,r,mPaint);
+        canvas.drawCircle(w/2,w/2,r,mPaint);
+        isDraw = false;
 
     }
 
@@ -142,10 +151,15 @@ public class EarthView extends View{
         if (bottom - top > 0 && points.size() == 0){
             w = getWidth();
             h = getHeight();
-            r = w/2;
+            ViewGroup.LayoutParams layoutParams = getLayoutParams();
+            layoutParams.height = w;
+            setLayoutParams(layoutParams);
+            h = w;
+            r = w/2-cr;
+            mr = r-cr;
             int x = 0,y = 0;
             int speed = getResources().getDimensionPixelSize(R.dimen.public_space_value_2);
-            for (int i = 0; i < 50;i++){
+            for (int i = 0; i < 100;i++){
                 x = random.nextInt(w);
                 y = random.nextInt(h);
                 while (Math.pow(x-r,2)+Math.pow(y-r,2) >= r*r){
@@ -202,7 +216,7 @@ public class EarthView extends View{
                 point.setY(r+my);
                 points.add(point);
             }
-            for (int i = 50; i < 60; i++){
+            for (int i = 100; i < 110; i++){
                 Point point = points.get(i);
 
                 point.setPoint1(points.get(i+1));
@@ -217,6 +231,7 @@ public class EarthView extends View{
 
     Random random = new Random();
     int cr = getResources().getDimensionPixelSize(R.dimen.public_space_value_2);
+    int mr;
     void movePoint(Point point){
 
         if (point.isBoard()){
@@ -258,7 +273,7 @@ public class EarthView extends View{
             y -= mcr * Math.sin(Math.toRadians(angle));
         }
 
-        while (Math.pow(point.getX()+x-point.getoX(),2)+Math.pow(point.getY()+y-point.getoY(),2) >= (r/4)*(r/4) || Math.pow(point.getX()+x-r,2)+Math.pow(point.getY()+y-r,2) >= r*r){
+        while (Math.pow(point.getX()+x-point.getoX(),2)+Math.pow(point.getY()+y-point.getoY(),2) >= (r/4)*(r/4) || Math.pow(point.getX()+x-r,2)+Math.pow(point.getY()+y-r,2) >= mr*mr){
              angle = random.nextInt(360);
             if (angle>=90 & angle < 180) {// 第二区
                 x -= mcr * Math.cos(Math.toRadians(angle));
