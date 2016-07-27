@@ -62,14 +62,14 @@ public class MainActivity extends UmengActivity implements BackHandledInterface{
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.imgOne:
-                        tvTitle.setText("首页");
+                        tvTitle.setText("借款");
                         transaction = fragmentManager.beginTransaction();
                         HomeFragment homeFragment = new HomeFragment();
                         transaction.replace(R.id.contentView, homeFragment);
                         transaction.commit();
                         break;
                     case R.id.imgTwo:
-                        tvTitle.setText("攻略");
+                        tvTitle.setText("信用卡");
                         transaction = fragmentManager.beginTransaction();
                         TwoFragment twoFragment = new TwoFragment();
                         transaction.replace(R.id.contentView, twoFragment);
@@ -77,7 +77,7 @@ public class MainActivity extends UmengActivity implements BackHandledInterface{
                         break;
 
                     case R.id.imgThree:
-                        tvTitle.setText("奖励");
+                        tvTitle.setText("我的");
                         transaction = fragmentManager.beginTransaction();
                         ThreeFragment threeFragment = new ThreeFragment();
                         transaction.replace(R.id.contentView, threeFragment);
@@ -109,7 +109,10 @@ public class MainActivity extends UmengActivity implements BackHandledInterface{
                 CommonUtil.downTime = lastDownTime;
                 showToast(getResources().getString(R.string.double_click_exit_app));
             } else {
-                MobclickAgent.onKillProcess(this);
+                try {
+                    MobclickAgent.onKillProcess(this);
+                }catch (Exception e){
+                }
                 System.exit(0);
                 finish();
             }

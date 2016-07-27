@@ -1,11 +1,17 @@
 package com.express.wallet.walletexpress.utils;
 
 import android.content.Context;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Build;
+import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
@@ -33,6 +39,8 @@ public class CommonUtil {
 
     public static final  String URL_TOKEN = "YitniN ";
     public static final String KEY = "jj.zljianjie.com";
+
+    public static final String SUGGEST_URL = "http://jj.zljianjie.com/public/api_zsjr/prods?price=3980&v5=1";
     public static final String GUIDE_URL = "http://jj.zljianjie.com/public/api_zsjr/guide.html?v5=1";
     public static final String REWARD_URL = "http://jj.zljianjie.com/public/api_zsjr/news?id=5&v5=1";
     public static final String REGISTER_AGREEMENT_URL = "http://jj.zljianjie.com/public/api_zsjr/pact.html?v5=1";
@@ -126,21 +134,6 @@ public class CommonUtil {
         webView.setHapticFeedbackEnabled(true);
         webView.setFocusableInTouchMode(true);
         webView.getSettings().setUseWideViewPort(true);
-        webView.setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                    case MotionEvent.ACTION_UP:
-                        if (!webView.hasFocus()) {
-                            v.requestFocusFromTouch();
-                        }
-                        break;
-                }
-                return false;
-            }
-        });
     }
 
     /**
@@ -169,4 +162,43 @@ public class CommonUtil {
             }
         }
     }
+
+    public static void syncCookie(Context context,String cookie){
+
+        CookieSyncManager.createInstance(context);
+        CookieManager cookieManager = CookieManager.getInstance();
+        cookieManager.setAcceptCookie(true);
+        cookieManager.removeSessionCookie();//移除
+        cookieManager.setCookie(DOMAIN, "zr_login_openid="+cookie);
+        CookieSyncManager.getInstance().sync();
+
+    }
+
+    public static String getDeviceId(Context mContext) {
+
+        String id;
+        try {
+            TelephonyManager telephonyManager = (TelephonyManager)
+                    mContext.getSystemService(Context.TELEPHONY_SERVICE);
+            id = telephonyManager.getDeviceId();
+
+        } catch (Exception e) {
+            id = "";
+        }
+
+        if (TextUtils.isEmpty(id)){
+            id = Settings.Secure.getString(mContext.getContentResolver(), Settings.Secure.ANDROID_ID);
+        }
+
+        if (TextUtils.isEmpty(id)){
+            id = Installation.id(mContext);
+        }
+
+        if (TextUtils.isEmpty(id)){
+            id = "";
+        }
+
+        return id;
+    }
+
 }

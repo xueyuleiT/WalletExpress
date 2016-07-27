@@ -2,6 +2,7 @@ package com.express.wallet.walletexpress;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -26,7 +27,7 @@ import retrofit2.Response;
  * Created by zenghui on 16/7/17.
  */
 public class RegisterActivity extends UmengActivity implements View.OnClickListener{
-
+    CountDownTimer countDownTimer;
     TextView tvMsgCode;
     EditText phone;
     Button register;
@@ -95,8 +96,6 @@ public class RegisterActivity extends UmengActivity implements View.OnClickListe
                     showToast("请输入正确的手机号");
                     return;
                 }
-
-                tvMsgCode.setEnabled(false);
                 getMsgCode(phone.getText().toString());
                 break;
         }
@@ -118,6 +117,7 @@ public class RegisterActivity extends UmengActivity implements View.OnClickListe
                 ResponseInfo responseInfo = response.body();
                 if (responseInfo != null ){
                     if ( responseInfo.getMsg() == 0){
+                        countDownVoice();
                         showToast("发送成功");
                     }else if ( responseInfo.getMsg() == 1){
                         showToast("无效的手机号");
@@ -145,13 +145,13 @@ public class RegisterActivity extends UmengActivity implements View.OnClickListe
         OkhttpTask okhttpTask = CommonUtil.getTask(CommonUtil.DOMAIN);
         Call<ResponseInfo> call = null;
         try {
-            String crypt = WalletUtil.base64Encode(WalletUtil.getSignature(CommonUtil.URL_TOKEN+phone,CommonUtil.KEY).getBytes());
+            String crypt = WalletUtil.base64Encode(WalletUtil.getSignature(CommonUtil.URL_TOKEN+phone.getText().toString(),CommonUtil.KEY).getBytes());
             RegisterOrLoginRequest registerOrLoginRequest = new RegisterOrLoginRequest();
             registerOrLoginRequest.setMobile(phone.getText().toString());
             registerOrLoginRequest.setCode(edtMsgCode.getText().toString());
             registerOrLoginRequest.setSign(java.net.URLEncoder.encode(crypt,"utf-8"));
-            registerOrLoginRequest.setDevice("");
-            registerOrLoginRequest.setSn("");
+            registerOrLoginRequest.setDevice(CommonUtil.getDeviceId(this));
+            registerOrLoginRequest.setSn(CommonUtil.getDeviceId(this));
             call = okhttpTask.registerOrLogin(registerOrLoginRequest);
             call.enqueue(new CookieCallBack<ResponseInfo>(){
                 @Override
@@ -167,5 +167,28 @@ public class RegisterActivity extends UmengActivity implements View.OnClickListe
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    private void countDownVoice() {
+        tvMsgCode.setEnabled(false);
+        countDownTimer = new CountDownTimer(60 * 1000, 1000) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                tvMsgCode.setText("重新获取" + (millisUntilFinished / 1000) + "秒");
+            }
+
+            @Override
+            public void onFinish() {
+                if (countDownTimer != null) {
+                    countDownTimer.cancel();
+                    countDownTimer = null;
+                    tvMsgCode.setEnabled(true);
+                    tvMsgCode.setText("获取验证码");
+                }
+            }
+        };
+        countDownTimer.start();
     }
 }

@@ -38,10 +38,10 @@
             android:background="@null"
             android:button="@null"
             android:checked="false"
-            android:drawableTop="@drawable/personal"
+            android:drawableTop="@drawable/loan"
             android:gravity="center"
             android:paddingTop="@dimen/public_space_value_6"
-            android:text="首页"
+            android:text="借款"
             android:textColor="#888888"
             android:textSize="@dimen/public_textsize_value_14" />
 
@@ -54,10 +54,10 @@
             android:background="@null"
             android:button="@null"
             android:checked="false"
-            android:drawableTop="@drawable/loan"
+            android:drawableTop="@drawable/credit"
             android:gravity="center"
             android:paddingTop="@dimen/public_space_value_6"
-            android:text="攻略"
+            android:text="信用卡"
             android:textColor="#888888"
             android:textSize="@dimen/public_textsize_value_14" />
 
@@ -69,10 +69,10 @@
             android:background="@null"
             android:button="@null"
             android:checked="false"
-            android:drawableTop="@drawable/credit"
+            android:drawableTop="@drawable/personal"
             android:gravity="center"
             android:paddingTop="@dimen/public_space_value_6"
-            android:text="奖励"
+            android:text="我的"
             android:textColor="#888888"
             android:textSize="@dimen/public_textsize_value_14"/>
 

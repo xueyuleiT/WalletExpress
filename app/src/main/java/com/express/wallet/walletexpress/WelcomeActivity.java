@@ -47,7 +47,7 @@ public class WelcomeActivity extends UmengActivity {
         WindowManager wm = this.getWindowManager();
         CommonUtil.screem_width = wm.getDefaultDisplay().getWidth();
         CommonUtil.screem_height = wm.getDefaultDisplay().getHeight();
-
+        CommonUtil.syncCookie(this,CommonUtil.getDeviceId(this));
         welcomeAnimation = AnimationUtils.loadAnimation(this, R.anim.welcome);
     }
 

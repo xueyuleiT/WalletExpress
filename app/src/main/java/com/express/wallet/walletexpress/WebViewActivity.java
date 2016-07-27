@@ -42,7 +42,7 @@ public class WebViewActivity extends UmengActivity implements MessageCallBackEve
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         String url = getIntent().getStringExtra(CommonUtil.WEBACTIVITY_LINK);
-
+        Log.d("","url =====>"+url);
         mTitle.setText(getIntent().getStringExtra(CommonUtil.WEBACTIVITY_TITLE));
         webView = (WebView) findViewById(R.id.webView);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -98,7 +98,7 @@ public class WebViewActivity extends UmengActivity implements MessageCallBackEve
     public void setWebViewSettings(final WebView webView) {
 
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setUserAgentString(CommonUtil.WEBVIEW_PARAM_USER_AGENT);
+//        webView.getSettings().setUserAgentString(CommonUtil.WEBVIEW_PARAM_USER_AGENT);
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
             webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         } else {
@@ -113,21 +113,6 @@ public class WebViewActivity extends UmengActivity implements MessageCallBackEve
         webView.setHapticFeedbackEnabled(true);
         webView.setFocusableInTouchMode(true);
         webView.getSettings().setUseWideViewPort(true);
-        webView.setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                    case MotionEvent.ACTION_UP:
-                        if (!webView.hasFocus()) {
-                            v.requestFocusFromTouch();
-                        }
-                        break;
-                }
-                return false;
-            }
-        });
     }
 
     @Override
