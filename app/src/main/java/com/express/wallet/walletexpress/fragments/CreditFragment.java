@@ -24,7 +24,7 @@ import com.express.wallet.walletexpress.utils.HostJsScope;
 /**
  * Created by cashbus on 6/22/16.
  */
-public class TwoFragment extends PlaceholderFragment {
+public class CreditFragment extends PlaceholderFragment {
     private WebView webView;
     private ProgressBar progressBar;
     View rootView;
@@ -86,8 +86,8 @@ public class TwoFragment extends PlaceholderFragment {
                 progressBar.setProgress(newProgress);
             }
         });
-        webView.loadUrl(CommonUtil.GUIDE_URL);
-        loadHistoryUrls.add(CommonUtil.GUIDE_URL);
+        webView.loadUrl(CommonUtil.CREDIT_URL);
+        loadHistoryUrls.add(CommonUtil.CREDIT_URL);
     }
 
     @Override

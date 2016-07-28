@@ -60,7 +60,7 @@ public class WelcomeActivity extends UmengActivity {
 //                scrollView.fullScroll(ScrollView.FOCUS_DOWN);
 //            }
 //        });
-//        imageView.setAnimation(welcomeAnimation);
+        imageView.setAnimation(welcomeAnimation);
         welcomeAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {

@@ -37,11 +37,13 @@ public class CommonUtil {
     public static final String DOMAIN = "http://jj.zljianjie.com";
     public static final int SITE_ID = 122811;
 
+    public static final String WEIXIN_APP_ID = "wxdb088041d2ef1e1d";//offcial
+
     public static final  String URL_TOKEN = "YitniN ";
     public static final String KEY = "jj.zljianjie.com";
 
     public static final String SUGGEST_URL = "http://jj.zljianjie.com/public/api_zsjr/prods?price=3980&v5=1";
-    public static final String GUIDE_URL = "http://jj.zljianjie.com/public/api_zsjr/guide.html?v5=1";
+    public static final String CREDIT_URL = "http://xyk.zljianjie.com";
     public static final String REWARD_URL = "http://jj.zljianjie.com/public/api_zsjr/news?id=5&v5=1";
     public static final String REGISTER_AGREEMENT_URL = "http://jj.zljianjie.com/public/api_zsjr/pact.html?v5=1";
     public static final String TAB_2_PAGE = "http:// jj.zljianjie.com/public/api_zsjr";

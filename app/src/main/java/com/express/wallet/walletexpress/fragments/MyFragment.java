@@ -23,7 +23,7 @@ import com.express.wallet.walletexpress.utils.HostJsScope;
 /**
  * Created by cashbus on 6/22/16.
  */
-public class ThreeFragment extends BasicFragment{
+public class MyFragment extends BasicFragment{
     private WebView webView;
     private ProgressBar progressBar;
     View rootView;

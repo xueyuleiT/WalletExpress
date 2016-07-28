@@ -37,6 +37,7 @@ public class WebViewActivity extends UmengActivity implements MessageCallBackEve
         setContentView(R.layout.activity_web_view);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mTitle = (TextView) findViewById(R.id.titleLeft);
+        findViewById(R.id.split).setVisibility(View.VISIBLE);
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
