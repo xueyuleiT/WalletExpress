@@ -15,8 +15,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 
+import com.express.wallet.walletexpress.listener.DialogListener;
+import com.express.wallet.walletexpress.utils.ChannelUtil;
 import com.express.wallet.walletexpress.utils.CommonUtil;
 import com.express.wallet.walletexpress.view.MyScrollView;
+import com.express.wallet.walletexpress.view.RadarView;
 import com.google.gson.Gson;
 import com.umeng.analytics.AnalyticsConfig;
 import com.umeng.analytics.MobclickAgent;
@@ -36,7 +39,7 @@ public class WelcomeActivity extends UmengActivity {
     Animation welcomeAnimation;
     MyScrollView scrollView;
     Intent intent;
-
+   RadarView radarView;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,16 @@ public class WelcomeActivity extends UmengActivity {
         CommonUtil.screem_height = wm.getDefaultDisplay().getHeight();
         CommonUtil.syncCookie(this,CommonUtil.getDeviceId(this));
         welcomeAnimation = AnimationUtils.loadAnimation(this, R.anim.welcome);
+
+        radarView = (RadarView) findViewById(R.id.radarView);
+        radarView.setDialogListener(new DialogListener() {
+            @Override
+            public void handle(String text) {
+                showToast(text);
+            }
+        });
+        MobclickAgent.updateOnlineConfig(this);
+        AnalyticsConfig.setChannel(ChannelUtil.getChannel(this));
     }
 
     @Override

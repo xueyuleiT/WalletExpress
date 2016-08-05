@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.express.wallet.walletexpress.BuildConfig;
 import com.express.wallet.walletexpress.R;
@@ -20,6 +22,7 @@ import com.express.wallet.walletexpress.listener.BackHandledInterface;
 import com.express.wallet.walletexpress.listener.CustomChromeClient;
 import com.express.wallet.walletexpress.utils.CommonUtil;
 import com.express.wallet.walletexpress.utils.HostJsScope;
+import com.express.wallet.walletexpress.utils.SettingUtils;
 
 /**
  * Created by cashbus on 6/22/16.
@@ -68,9 +71,21 @@ public class CreditFragment extends PlaceholderFragment {
                 progressBar.setVisibility(View.GONE);
                 if (BuildConfig.DEBUG) {
                     CookieManager cookieManager = CookieManager.getInstance();
-                    String CookieStr = cookieManager.getCookie(CommonUtil.DOMAIN);
+                    String CookieStr = cookieManager.getCookie(url);
                     Log.d("","CookieStr ===>"+CookieStr);
                 }
+                CookieManager cookieManager = CookieManager.getInstance();
+                String cookie = cookieManager.getCookie(CommonUtil.DOMAIN);
+                Log.d("","cookie =====>"+cookie);
+                    if (cookie.contains(CommonUtil.OPEN_ID+"=")){
+                        String[] arr = cookie.split(";");
+                        String temp = arr[arr.length-1];
+                        int index = temp.indexOf("=");
+                        if (index != -1){
+                            CommonUtil.COOKIE = temp.substring(index+1);
+                            SettingUtils.set(getActivity(),CommonUtil.OPEN_ID,CommonUtil.COOKIE);
+                        }
+                    }
             }
 
             @Override

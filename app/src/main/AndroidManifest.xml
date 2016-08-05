@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.express.wallet.walletexpress">
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/logo"
@@ -41,9 +44,8 @@
             android:theme="@style/AppTheme.WindowFullScreen">
 
         </activity>
-        <meta-data
-            android:name="UMENG_APPKEY"
-            android:value="561cac81e0f55a8ed9005" />
+
+        <meta-data android:value="57a00b1d67e58ea3fb00111f" android:name="UMENG_APPKEY"></meta-data>
     </application>
 
 </manifest>

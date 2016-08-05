@@ -23,6 +23,7 @@ import com.express.wallet.walletexpress.listener.MessageCallBackEvent;
 import com.express.wallet.walletexpress.model.MessageEvent;
 import com.express.wallet.walletexpress.utils.CommonUtil;
 import com.express.wallet.walletexpress.utils.HostJsScope;
+import com.express.wallet.walletexpress.utils.SettingUtils;
 
 import de.greenrobot.event.EventBus;
 
@@ -72,6 +73,17 @@ public class WebViewActivity extends UmengActivity implements MessageCallBackEve
                     String CookieStr = cookieManager.getCookie(CommonUtil.DOMAIN);
                     Log.d("","CookieStr ===>"+CookieStr);
                 }
+                CookieManager cookieManager = CookieManager.getInstance();
+                String cookie = cookieManager.getCookie(CommonUtil.DOMAIN);
+                if (cookie.contains(CommonUtil.OPEN_ID+"=")){
+                    String[] arr = cookie.split(";");
+                    String temp = arr[arr.length-1];
+                    int index = temp.indexOf("=");
+                    if (index != -1){
+                        CommonUtil.COOKIE = temp.substring(index+1);
+                        SettingUtils.set(WebViewActivity.this,CommonUtil.OPEN_ID,CommonUtil.COOKIE);
+                    }
+                }
             }
 
             @Override
@@ -99,7 +111,7 @@ public class WebViewActivity extends UmengActivity implements MessageCallBackEve
     public void setWebViewSettings(final WebView webView) {
 
         webView.getSettings().setJavaScriptEnabled(true);
-//        webView.getSettings().setUserAgentString(CommonUtil.WEBVIEW_PARAM_USER_AGENT);
+        webView.getSettings().setUserAgentString(CommonUtil.WEBVIEW_PARAM_USER_AGENT);
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
             webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         } else {

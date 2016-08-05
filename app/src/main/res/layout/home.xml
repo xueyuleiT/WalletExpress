@@ -10,14 +10,16 @@
         android:layout_height="0dp"
         android:layout_weight="1.1">
 
-       <include layout="@layout/banner" />
-
+       <!--<include layout="@layout/banner" />-->
+        <com.express.wallet.walletexpress.view.FindViewpagerTabView
+            android:id="@+id/findViewpagerTabView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
 
         <com.express.wallet.walletexpress.view.ADTextView
             android:id="@+id/ad_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/O1"
             android:alpha="0.8"
             android:paddingLeft="@dimen/public_space_value_5"
             android:paddingRight="@dimen/public_space_value_5"
@@ -157,7 +159,8 @@
             android:background="@drawable/edt_bg_r5"
             android:layout_width="match_parent"
             android:layout_height="@dimen/public_space_value_40"
-            android:textColor="@color/T4"/>
+            android:textColor="@color/T4"
+            android:id="@+id/loanMoney" />
         </LinearLayout>
         <RelativeLayout
             android:layout_width="match_parent"

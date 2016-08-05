@@ -11,6 +11,11 @@
             android:layout_height="match_parent"
             android:src="@mipmap/convenient"/>
 
+        <com.express.wallet.walletexpress.view.RadarView
+            android:visibility="gone"
+            android:id="@+id/radarView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
         <com.express.wallet.walletexpress.view.EarthView
             android:visibility="gone"
             android:layout_marginLeft="@dimen/public_space_value_10"

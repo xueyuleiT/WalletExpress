@@ -1,9 +1,11 @@
 package com.express.wallet.walletexpress.fragments;
 
 import android.graphics.Bitmap;
+import android.graphics.ImageFormat;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,17 +15,19 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.express.wallet.walletexpress.BuildConfig;
 import com.express.wallet.walletexpress.R;
 import com.express.wallet.walletexpress.listener.CustomChromeClient;
 import com.express.wallet.walletexpress.utils.CommonUtil;
 import com.express.wallet.walletexpress.utils.HostJsScope;
+import com.express.wallet.walletexpress.utils.SettingUtils;
 
 /**
  * Created by cashbus on 6/22/16.
  */
-public class MyFragment extends BasicFragment{
+public class MyFragment extends  PlaceholderFragment{
     private WebView webView;
     private ProgressBar progressBar;
     View rootView;
@@ -57,6 +61,7 @@ public class MyFragment extends BasicFragment{
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                loadHistoryUrls.add(url);
                 return false;
             }
 
@@ -66,8 +71,20 @@ public class MyFragment extends BasicFragment{
                 progressBar.setVisibility(View.GONE);
                 if (BuildConfig.DEBUG) {
                     CookieManager cookieManager = CookieManager.getInstance();
-                    String CookieStr = cookieManager.getCookie(CommonUtil.DOMAIN);
+                    String CookieStr = cookieManager.getCookie(url);
                     Log.d("","CookieStr ===>"+CookieStr);
+                }
+
+                CookieManager cookieManager = CookieManager.getInstance();
+                String cookie = cookieManager.getCookie(CommonUtil.DOMAIN);
+                if (cookie.contains(CommonUtil.OPEN_ID+"=")){
+                        String[] arr = cookie.split(";");
+                        String temp = arr[arr.length-1];
+                        int index = temp.indexOf("=");
+                        if (index != -1){
+                            CommonUtil.COOKIE = temp.substring(index+1);
+                            SettingUtils.set(getActivity(),CommonUtil.OPEN_ID,CommonUtil.COOKIE);
+                        }
                 }
             }
 
@@ -84,9 +101,36 @@ public class MyFragment extends BasicFragment{
                 progressBar.setProgress(newProgress);
             }
         });
-        webView.loadUrl("http://jj.zljianjie.com/public/api_zsjr/user_center.html?v5=1");
+        webView.loadUrl(CommonUtil.MY_URL);
+        loadHistoryUrls.add(CommonUtil.MY_URL);
     }
 
+    @Override
+    public boolean onBackPressed() {
+        Log.d("","webView.canGoBack() =====>"+webView.canGoBack());
+        if (webView.canGoBack()){
 
+            //过滤是否为重定向后的链接
+            if(loadHistoryUrls.size()>0&&loadHistoryUrls.get(loadHistoryUrls.size()-1).contains("index.html")) {
+                //移除加载栈中的最后两个链接
+                loadHistoryUrls.remove(loadHistoryUrls.get(loadHistoryUrls.size() - 1));
+            }
+            if (loadHistoryUrls.size() == 0){
+                return false;
+            }
+            loadHistoryUrls.remove(loadHistoryUrls.get(loadHistoryUrls.size()-1));
+
+            if (loadHistoryUrls.size() == 0){
+                return false;
+            }
+            //加载重定向之前的页
+            webView.loadUrl(loadHistoryUrls.get(loadHistoryUrls.size()-1));
+
+//            webView.goBack();
+            return true;
+        }else {
+            return false;
+        }
+    }
 
 }

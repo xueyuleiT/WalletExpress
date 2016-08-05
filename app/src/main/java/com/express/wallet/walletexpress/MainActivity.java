@@ -67,7 +67,7 @@ public class MainActivity extends UmengActivity implements BackHandledInterface{
         transaction = fragmentManager.beginTransaction();
 
 
-        tvTitle.setText("首页");
+        tvTitle.setText("借款");
         HomeFragment homeFragment = new HomeFragment();
         transaction.replace(R.id.contentView, homeFragment);
         transaction.commit();
