@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,6 +61,7 @@ import retrofit2.Response;
 public class HomeFragment extends BasicFragment implements View.OnClickListener{
     FindViewpagerTabView findViewpagerTabView;
     View rootView;
+    RelativeLayout progressBarLayout;
     Button loan;
     private ScheduledExecutorService scheduledExecutorService;
     // 轮播banner的数据
@@ -89,6 +91,8 @@ public class HomeFragment extends BasicFragment implements View.OnClickListener{
         loan = (Button) rootView.findViewById(R.id.loan);
         loan.setOnClickListener(this);
 
+        progressBarLayout = (RelativeLayout) rootView.findViewById(R.id.progressBarLayout);
+        progressBarLayout.setVisibility(View.VISIBLE);
         finishCount = (TextView) rootView.findViewById(R.id.finishCount);
         finishMoney = (TextView) rootView.findViewById(R.id.finishMoney);
 
@@ -129,6 +133,7 @@ public class HomeFragment extends BasicFragment implements View.OnClickListener{
                 @Override
                 public void onResponse(Call<MainResResponse> call, Response<MainResResponse> response) {
                     super.onResponse(call,response);
+                    progressBarLayout.setVisibility(View.GONE);
                     MainResResponse mainResResponse = response.body();
                     if (mainResResponse != null){
                         if (mainResResponse.getMsg() == 0){
@@ -197,6 +202,7 @@ public class HomeFragment extends BasicFragment implements View.OnClickListener{
                 @Override
                 public void onFailure(Call<MainResResponse> call, Throwable t) {
                     super.onFailure(call,t);
+                    progressBarLayout.setVisibility(View.GONE);
                 }
             });
         } catch (Exception e) {

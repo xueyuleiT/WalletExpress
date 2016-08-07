@@ -41,17 +41,18 @@ public class MainActivity extends UmengActivity implements BackHandledInterface{
         MobclickAgent.setDebugMode(BuildConfig.DEBUG);
         initView();
     }
-
+    Toolbar mToolbar;
     void initView(){
 
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
+        mToolbar.setVisibility(View.GONE);
         tvTitle = (TextView) findViewById(R.id.title);
         rightImg = (ImageView) findViewById(R.id.rightImg);
 
-        rightImg.setVisibility(View.VISIBLE);
-        rightImg.setImageResource(R.mipmap.more);
+//        rightImg.setVisibility(View.GONE);
+//        rightImg.setImageResource(R.mipmap.more);
 
         rightImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +78,7 @@ public class MainActivity extends UmengActivity implements BackHandledInterface{
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.imgOne:
+                        mToolbar.setVisibility(View.GONE);
                         tvTitle.setText("借款");
                         transaction = fragmentManager.beginTransaction();
                         HomeFragment homeFragment = new HomeFragment();
@@ -84,6 +86,7 @@ public class MainActivity extends UmengActivity implements BackHandledInterface{
                         transaction.commit();
                         break;
                     case R.id.imgTwo:
+                        mToolbar.setVisibility(View.VISIBLE);
                         tvTitle.setText("信用卡");
                         transaction = fragmentManager.beginTransaction();
                         CreditFragment twoFragment = new CreditFragment();
@@ -92,6 +95,7 @@ public class MainActivity extends UmengActivity implements BackHandledInterface{
                         break;
 
                     case R.id.imgThree:
+                        mToolbar.setVisibility(View.GONE);
                         tvTitle.setText("我的");
                         transaction = fragmentManager.beginTransaction();
                         MyFragment threeFragment = new MyFragment();

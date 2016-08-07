@@ -16,6 +16,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.express.wallet.walletexpress.listener.CustomChromeClient;
@@ -32,6 +33,7 @@ public class WebViewActivity extends UmengActivity implements MessageCallBackEve
     private TextView mTitle;
     private WebView webView;
     private ProgressBar progressBar;
+    RelativeLayout progressBarLayout;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +44,10 @@ public class WebViewActivity extends UmengActivity implements MessageCallBackEve
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+        progressBarLayout = (RelativeLayout) findViewById(R.id.progressBarLayout);
+        progressBarLayout.setVisibility(View.VISIBLE);
 
         String url = getIntent().getStringExtra(CommonUtil.WEBACTIVITY_LINK);
         Log.d("","url =====>"+url);
@@ -68,6 +74,7 @@ public class WebViewActivity extends UmengActivity implements MessageCallBackEve
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 progressBar.setVisibility(View.GONE);
+                progressBarLayout.setVisibility(View.GONE);
                 if (BuildConfig.DEBUG) {
                     CookieManager cookieManager = CookieManager.getInstance();
                     String CookieStr = cookieManager.getCookie(CommonUtil.DOMAIN);
@@ -77,10 +84,17 @@ public class WebViewActivity extends UmengActivity implements MessageCallBackEve
                 String cookie = cookieManager.getCookie(CommonUtil.DOMAIN);
                 if (cookie.contains(CommonUtil.OPEN_ID+"=")){
                     String[] arr = cookie.split(";");
-                    String temp = arr[arr.length-1];
-                    int index = temp.indexOf("=");
-                    if (index != -1){
-                        CommonUtil.COOKIE = temp.substring(index+1);
+                    String temp = "";
+                    int length = arr.length;
+                    for (int i = length -1; i >= 0; i--) {
+                        if (arr[i].contains(CommonUtil.OPEN_ID+"=")){
+                            temp = arr[i];
+                            break;
+                        }
+                    }
+                    arr = temp.split("=");
+                    if (arr.length > 1){
+                        CommonUtil.COOKIE = arr[1];
                         SettingUtils.set(WebViewActivity.this,CommonUtil.OPEN_ID,CommonUtil.COOKIE);
                     }
                 }

@@ -15,6 +15,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.AbsListView;
@@ -232,6 +233,16 @@ public class FindViewpagerTabView extends LinearLayout implements View.OnClickLi
             View dot = LayoutInflater.from(getContext()).inflate(R.layout.dot_layout, null);
             dot.setLayoutParams(layoutParams);
             mTabLy.addView(dot);
+        }
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        super.onLayout(changed, l, t, r, b);
+        if (b-t>0){
+            ViewGroup.LayoutParams layoutParams = getLayoutParams();
+            layoutParams.height = getWidth()/2;
+            setLayoutParams(layoutParams);
         }
     }
 }

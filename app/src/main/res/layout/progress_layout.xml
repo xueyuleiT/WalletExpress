@@ -1,0 +1,52 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/progressBarLayout"
+    android:background="@android:color/white"
+    android:visibility="gone"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal" >
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:background="@drawable/wallet_progress"
+            android:paddingLeft="@dimen/public_space_value_20"
+            android:paddingRight="@dimen/public_space_value_20"
+            android:paddingBottom="@dimen/public_space_value_10"
+            android:paddingTop="@dimen/public_space_value_10"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/progressBar1"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                />
+
+            <TextView
+                android:id="@+id/dialog_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="@dimen/public_space_value_10"
+                android:text="获取中..."
+                android:textColor="@android:color/white"
+                android:textSize="14dp" />
+        </LinearLayout>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+    </LinearLayout>
+</RelativeLayout>

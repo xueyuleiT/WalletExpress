@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
@@ -7,20 +10,20 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.1">
+        android:layout_height="wrap_content">
 
        <!--<include layout="@layout/banner" />-->
         <com.express.wallet.walletexpress.view.FindViewpagerTabView
             android:id="@+id/findViewpagerTabView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <com.express.wallet.walletexpress.view.ADTextView
+            android:background="@color/colorPrimaryDark"
             android:id="@+id/ad_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:alpha="0.8"
+            android:alpha="0.6"
             android:paddingLeft="@dimen/public_space_value_5"
             android:paddingRight="@dimen/public_space_value_5"
             android:textColor="@android:color/white"
@@ -232,3 +235,5 @@
         </LinearLayout>
 </LinearLayout>
 </LinearLayout>
+    <include layout="@layout/progress_layout" />
+</RelativeLayout>

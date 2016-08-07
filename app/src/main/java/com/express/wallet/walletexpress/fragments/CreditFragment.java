@@ -14,6 +14,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.express.wallet.walletexpress.BuildConfig;
@@ -31,6 +32,7 @@ public class CreditFragment extends PlaceholderFragment {
     private WebView webView;
     private ProgressBar progressBar;
     View rootView;
+    RelativeLayout progressBarLayout;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +50,8 @@ public class CreditFragment extends PlaceholderFragment {
         super.onActivityCreated(savedInstanceState);
         webView = (WebView) rootView.findViewById(R.id.webView);
         progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
-
+        progressBarLayout = (RelativeLayout) rootView.findViewById(R.id.progressBarLayout);
+        progressBarLayout.setVisibility(View.VISIBLE);
         CommonUtil.setWebViewSettings(webView);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
@@ -69,6 +72,7 @@ public class CreditFragment extends PlaceholderFragment {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 progressBar.setVisibility(View.GONE);
+                progressBarLayout.setVisibility(View.GONE);
                 if (BuildConfig.DEBUG) {
                     CookieManager cookieManager = CookieManager.getInstance();
                     String CookieStr = cookieManager.getCookie(url);
@@ -77,15 +81,32 @@ public class CreditFragment extends PlaceholderFragment {
                 CookieManager cookieManager = CookieManager.getInstance();
                 String cookie = cookieManager.getCookie(CommonUtil.DOMAIN);
                 Log.d("","cookie =====>"+cookie);
-                    if (cookie.contains(CommonUtil.OPEN_ID+"=")){
-                        String[] arr = cookie.split(";");
-                        String temp = arr[arr.length-1];
-                        int index = temp.indexOf("=");
-                        if (index != -1){
-                            CommonUtil.COOKIE = temp.substring(index+1);
-                            SettingUtils.set(getActivity(),CommonUtil.OPEN_ID,CommonUtil.COOKIE);
+//                Toast.makeText(webView.getContext(),cookie,Toast.LENGTH_SHORT).show();
+//                    if (cookie.contains(CommonUtil.OPEN_ID+"=")){
+//                        String[] arr = cookie.split(";");
+//                        String temp = arr[arr.length-1];
+//                        int index = temp.indexOf("=");
+//                        if (index != -1){
+//                            CommonUtil.COOKIE = temp.substring(index+1);
+//                            SettingUtils.set(getActivity(),CommonUtil.OPEN_ID,CommonUtil.COOKIE);
+//                        }
+//                    }
+                if (cookie.contains(CommonUtil.OPEN_ID+"=")){
+                    String[] arr = cookie.split(";");
+                    String temp = "";
+                    int length = arr.length;
+                    for (int i = length -1; i >= 0; i--) {
+                        if (arr[i].contains(CommonUtil.OPEN_ID+"=")){
+                            temp = arr[i];
+                            break;
                         }
                     }
+                    arr = temp.split("=");
+                    if (arr.length > 1){
+                        CommonUtil.COOKIE = arr[1];
+                        SettingUtils.set(getActivity(),CommonUtil.OPEN_ID,CommonUtil.COOKIE);
+                    }
+                }
             }
 
             @Override

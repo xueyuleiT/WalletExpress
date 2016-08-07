@@ -15,6 +15,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.express.wallet.walletexpress.BuildConfig;
@@ -30,6 +31,7 @@ import com.express.wallet.walletexpress.utils.SettingUtils;
 public class MyFragment extends  PlaceholderFragment{
     private WebView webView;
     private ProgressBar progressBar;
+    RelativeLayout progressBarLayout;
     View rootView;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +50,9 @@ public class MyFragment extends  PlaceholderFragment{
         super.onActivityCreated(savedInstanceState);
         webView = (WebView) rootView.findViewById(R.id.webView);
         progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
+
+        progressBarLayout = (RelativeLayout) rootView.findViewById(R.id.progressBarLayout);
+        progressBarLayout.setVisibility(View.VISIBLE);
 
         CommonUtil.setWebViewSettings(webView);
 
@@ -69,6 +74,7 @@ public class MyFragment extends  PlaceholderFragment{
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 progressBar.setVisibility(View.GONE);
+                progressBarLayout.setVisibility(View.GONE);
                 if (BuildConfig.DEBUG) {
                     CookieManager cookieManager = CookieManager.getInstance();
                     String CookieStr = cookieManager.getCookie(url);
@@ -77,14 +83,30 @@ public class MyFragment extends  PlaceholderFragment{
 
                 CookieManager cookieManager = CookieManager.getInstance();
                 String cookie = cookieManager.getCookie(CommonUtil.DOMAIN);
+//                if (cookie.contains(CommonUtil.OPEN_ID+"=")){
+//                        String[] arr = cookie.split(";");
+//                        String temp = arr[arr.length-1];
+//                        int index = temp.indexOf("=");
+//                        if (index != -1){
+//                            CommonUtil.COOKIE = temp.substring(index+1);
+//                            SettingUtils.set(getActivity(),CommonUtil.OPEN_ID,CommonUtil.COOKIE);
+//                        }
+//                }
                 if (cookie.contains(CommonUtil.OPEN_ID+"=")){
-                        String[] arr = cookie.split(";");
-                        String temp = arr[arr.length-1];
-                        int index = temp.indexOf("=");
-                        if (index != -1){
-                            CommonUtil.COOKIE = temp.substring(index+1);
-                            SettingUtils.set(getActivity(),CommonUtil.OPEN_ID,CommonUtil.COOKIE);
+                    String[] arr = cookie.split(";");
+                    String temp = "";
+                    int length = arr.length;
+                    for (int i = length -1; i >= 0; i--) {
+                        if (arr[i].contains(CommonUtil.OPEN_ID+"=")){
+                            temp = arr[i];
+                            break;
                         }
+                    }
+                    arr = temp.split("=");
+                    if (arr.length > 1){
+                        CommonUtil.COOKIE = arr[1];
+                        SettingUtils.set(getActivity(),CommonUtil.OPEN_ID,CommonUtil.COOKIE);
+                    }
                 }
             }
 
